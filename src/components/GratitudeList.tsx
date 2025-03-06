@@ -17,8 +17,15 @@ export const GratitudeList = () => {
   return (
     <div className="space-y-4">
       {entries.map((entry) => (
-        <Card key={entry.id} className="p-6 space-y-2">
+        <Card key={entry.id} className="p-6 space-y-4">
           <p className="text-lg">{entry.content}</p>
+          {entry.imageUrl && (
+            <img 
+              src={entry.imageUrl} 
+              alt="Entry attachment" 
+              className="rounded-lg w-full max-h-[300px] object-cover"
+            />
+          )}
           <p className="text-sm text-muted-foreground">
             {format(new Date(entry.date), "MMMM d, yyyy")}
           </p>
