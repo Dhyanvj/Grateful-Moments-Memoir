@@ -1,5 +1,6 @@
 
 import { GratitudeEntry } from "@/components/GratitudeEntry";
+import { GratitudeList } from "@/components/GratitudeList";
 import { Header } from "@/components/Header";
 
 const Index = () => {
@@ -13,6 +14,7 @@ const Index = () => {
             <p className="text-lg text-muted-foreground">What are you grateful for today?</p>
           </div>
           <GratitudeEntry />
+          <GratitudeList />
         </div>
       </main>
     </div>

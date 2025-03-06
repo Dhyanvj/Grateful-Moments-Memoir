@@ -4,14 +4,23 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { SmilePlus } from "lucide-react";
+import { useGratitudeEntries } from "@/hooks/useGratitudeEntries";
+import { toast } from "sonner";
 
 export const GratitudeEntry = () => {
   const [entry, setEntry] = useState('');
+  const { addEntry } = useGratitudeEntries();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Save entry
-    setEntry('');
+    if (!entry.trim()) return;
+    
+    addEntry.mutate(entry, {
+      onSuccess: () => {
+        setEntry('');
+        toast.success("Entry saved successfully!");
+      },
+    });
   };
 
   return (
@@ -31,7 +40,11 @@ export const GratitudeEntry = () => {
             className="min-h-[120px] resize-none bg-white/50 backdrop-blur-sm border-none focus:ring-2 ring-primary/20 text-lg"
           />
           <div className="flex justify-end">
-            <Button type="submit" className="bg-primary hover:bg-primary/90 text-primary-foreground">
+            <Button 
+              type="submit" 
+              className="bg-primary hover:bg-primary/90 text-primary-foreground"
+              disabled={!entry.trim() || addEntry.isPending}
+            >
               Save Entry
             </Button>
           </div>
